@@ -1,3 +1,4 @@
+import isEmpty from 'lodash.isempty';
 import { SpacebarsCompiler } from 'meteor/spacebars-compiler';
 import { generateBodyJS, generateTemplateJS, generateDynTemplateJS } from './code-generation';
 import { throwCompileError } from './throw-compile-error';
@@ -11,6 +12,7 @@ export function compileTagsWithSpacebars(tags, hmrAvailable, dynamic = false) {
 
   return handler.getResults();
 }
+
 
 class SpacebarsTagCompiler {
   constructor() {
@@ -31,7 +33,7 @@ class SpacebarsTagCompiler {
     this.tag = tag;
 
     // do we have 1 or more attributes?
-    const hasAttribs = ! _.isEmpty(this.tag.attribs);
+    const hasAttribs = !isEmpty(this.tag.attribs);
 
     if (this.tag.tagName === "head") {
       if (hasAttribs) {
